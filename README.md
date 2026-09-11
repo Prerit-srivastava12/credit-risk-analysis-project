@@ -57,4 +57,4 @@ Small business loans stand out at 29.71% default rate, well above everything els
 ### Purpose and income together
 [`sql_queries/segment_risk_purpose_income.sql`](sql_queries/segment_risk_purpose_income.sql) · [`charts/segment_risk_heatmap.png`](charts/segment_risk_heatmap.png)
 
-Wanted to check if these two interact or just add up independently — looks like the latter. Small business loans stay risky no matter the income bracket, and within basically every purpose, default rate drops as income rises. The riskiest combination (small business, mid income, 31.71%) is close to 3x the safest one (car loans, high income, 11.54%).
+Wanted to check if these two interact or just add up independently, it looks like the latter. Small business loans stay risky no matter the income bracket, and within basically every purpose, default rate drops as income rises. The riskiest combination (small business, mid income, 31.71%) is close to 3x the safest one (car loans, high income, 11.54%).
