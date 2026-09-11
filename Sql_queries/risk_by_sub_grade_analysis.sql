@@ -1,3 +1,5 @@
+-- Risk by sub-grade: same as risk_by_grade, a more precise analysis (A1-G5)
+
 SELECT 
     sub_grade,
     COUNT(*) AS n_loans,
