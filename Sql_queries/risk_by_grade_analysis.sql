@@ -1,3 +1,5 @@
+-- Risk by grade: average interest rate vs default rate for each Lending Club loan grade
+
 SELECT 
     grade,
     COUNT(*) AS n_loans,
