@@ -1,0 +1,4 @@
+"ltv_band","n_loans","default_rate_pct"
+"High LTV (90%+)","1219","22.64"
+"Low LTV (<70%)","65365","16.15"
+"Mid LTV (70-90%)","166570","23.88"
