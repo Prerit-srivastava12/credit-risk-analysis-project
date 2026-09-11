@@ -1,3 +1,5 @@
+-- Default rate by purpose and income bracket combined
+
 SELECT 
     t1.purpose,
     CASE 
