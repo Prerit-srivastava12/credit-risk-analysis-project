@@ -1,4 +1,4 @@
-Vintage/cohort default analysis: default rate by loan issue quarter
+-- Vintage/cohort default analysis: default rate by loan issue quarter
  
 SELECT 
     DATE_TRUNC('quarter', issue_date) AS issue_quarter,
