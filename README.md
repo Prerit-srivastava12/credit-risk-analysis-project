@@ -32,17 +32,17 @@ The question I was working from: is the loan book getting riskier over time, whe
 ### Default rate by issue quarter (vintage analysis)
 [`sql_queries/vintage_analysis.sql`](sql_queries/vintage_analysis.sql) · [`charts/vintage_default_rate_chart.png`](charts/vintage_default_rate_chart.png)
 
-Default rate went from around 12% in 2008 up to roughly 26% by 2016, then flattened out near 24%. I cut the chart off after Q3 2017 on purpose — anything issued after that hasn't had time to actually default yet, so the raw numbers for those quarters look artificially low. Including them would make it look like risk suddenly dropped at the end, which isn't real.
+Default rate went from around 12% in 2008 up to roughly 26% by 2016, then flattened out near 24%. I cut the chart off after Q3 2017 on purpose because anything issued after that hasn't had time to actually default yet, so the raw numbers for those quarters look artificially low. Including them would make it look like risk suddenly dropped at the end, which isn't real.
 
 ### Interest rate vs. default rate, by grade
 [`sql_queries/risk_by_grade.sql`](sql_queries/risk_by_grade.sql) · [`charts/risk_by_grade_chart.png`](charts/risk_by_grade_chart.png)
 
-Grade A loans charge about 7% interest and default 6% of the time which is a decent cushion. Grade G only charges around 28% interest but defaults on nearly half of all loans. The gap between what's charged and what's lost basically disappears at the risky end, which suggests the pricing isn't really keeping up with the risk. Worth saying: this is just interest rate minus default rate by loan count, not a real profitability number — that would need recovery rates and dollar weighting, which I didn't have here.
+Grade A loans charge about 7% interest and default 6% of the time which is a decent cushion. Grade G only charges around 28% interest but defaults on nearly half of all loans. The gap between what's charged and what's lost basically disappears at the risky end, which suggests the pricing isn't really keeping up with the risk. Worth saying: this is just interest rate minus default rate by loan count, not a real profitability number that would need recovery rates and dollar weighting, which I didn't have here.
 
 ### Same thing, by sub-grade
 [`sql_queries/risk_by_subgrade.sql`](sql_queries/risk_by_subgrade.sql) · [`results/risk_by_subgrade_results.csv`](results/risk_by_subgrade_results.csv)
 
-Just checking whether the grade-level pattern holds at a finer level (A1 to G5 instead of just A to G). It does — both interest rate and default rate climb smoothly within each letter grade, so the grading system looks internally consistent.
+Just checking whether the grade-level pattern holds at a finer level (A1 to G5 instead of just A to G). It does as both interest rate and default rate climb smoothly within each letter grade, so the grading system looks internally consistent.
 
 ### Default rate by income bracket
 [`sql_queries/segment_risk_by_income.sql`](sql_queries/segment_risk_by_income.sql) · [`charts/segment_risk_by_income_chart.png`](charts/segment_risk_by_income_chart.png)
@@ -52,18 +52,9 @@ Low income: 23.75%. Mid: 20.63%. High: 16.31%. Pretty steady decline, about a 7-
 ### Default rate by loan purpose
 [`sql_queries/segment_risk_by_purpose.sql`](sql_queries/segment_risk_by_purpose.sql) · [`charts/segment_risk_by_purpose_chart.png`](charts/segment_risk_by_purpose_chart.png)
 
-Small business loans stand out — 29.71% default rate, well above everything else (next closest is renewable energy at 23.69%). Wedding loans are the safest at 12.16%.
+Small business loans stand out at 29.71% default rate, well above everything else (next closest is renewable energy at 23.69%). Wedding loans are the safest at 12.16%.
 
 ### Purpose and income together
 [`sql_queries/segment_risk_purpose_income.sql`](sql_queries/segment_risk_purpose_income.sql) · [`charts/segment_risk_heatmap.png`](charts/segment_risk_heatmap.png)
 
 Wanted to check if these two interact or just add up independently — looks like the latter. Small business loans stay risky no matter the income bracket, and within basically every purpose, default rate drops as income rises. The riskiest combination (small business, mid income, 31.71%) is close to 3x the safest one (car loans, high income, 11.54%).
-
----
-
-## Part 2: L&T NBFC (India)
-*Not done yet — coming next.*
-
-## A few honest limitations
-- The grade vs. default comparison isn't a real profitability number, just a rough directional signal (see note above).
-- Recent Lending Club vintages (after Q3 2017) are left out of the trend analysis since they haven't seasoned yet.
