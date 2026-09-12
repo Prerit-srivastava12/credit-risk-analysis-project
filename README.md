@@ -35,12 +35,12 @@ The question I was working from: is the loan book getting riskier over time, whe
 Default rate went from around 12% in 2008 up to roughly 26% by 2016, then flattened out near 24%. I cut the chart off after Q3 2017 on purpose because anything issued after that hasn't had time to actually default yet, so the raw numbers for those quarters look artificially low. Including them would make it look like risk suddenly dropped at the end, which isn't real.
 
 ### Interest rate vs. default rate, by grade
-[`Sql_queries/risk_by_grade.sql`](Sql_queries/risk_by_grade_analysis.sql) · [`Charts/risk_by_grade_chart.png`](Charts/risk_by_grade_chart.png)
+[`Sql_queries/risk_by_grade_analysis.sql`](Sql_queries/risk_by_grade_analysis.sql) · [`Charts/risk_by_grade_chart.png`](Charts/risk_by_grade_chart.png)
 
 Grade A loans charge about 7% interest and default 6% of the time which is a decent cushion. Grade G only charges around 28% interest but defaults on nearly half of all loans. The gap between what's charged and what's lost basically disappears at the risky end, which suggests the pricing isn't really keeping up with the risk. Worth saying: this is just interest rate minus default rate by loan count, not a real profitability number that would need recovery rates and dollar weighting, which I didn't have here.
 
 ### Same thing, by sub-grade
-[`Sql_queries/risk_by_subgrade.sql`](Sql_queries/risk_by_sub_grade_analysis.sql) · [`Charts/risk_by_subgrade_chart.png`](Charts/risk_by_sub_grade_chart.png)
+[`Sql_queries/risk_by_sub_grade_analysis.sql`](Sql_queries/risk_by_sub_grade_analysis.sql) · [`Charts/risk_by_sub_grade_chart.png`](Charts/risk_by_sub_grade_chart.png)
 
 Just checking whether the grade-level pattern holds at a finer level (A1 to G5 instead of just A to G). It does as both interest rate and default rate climb smoothly within each letter grade, so the grading system looks internally consistent.
 
