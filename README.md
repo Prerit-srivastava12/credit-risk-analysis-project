@@ -58,3 +58,37 @@ Small business loans stand out at 29.71% default rate, well above everything els
 [`Sql_queries/segment_risk_purpose_income.sql`](Sql_queries/segment_risk_purpose_income.sql) · [`Charts/segment_risk_by_purpose_income_heatmap.png`](Charts/segment_risk_by_purpose_income_heatmap.png)
 
 Wanted to check if these two interact or just add up independently, it looks like the latter. Small business loans stay risky no matter the income bracket, and within basically every purpose, default rate drops as income rises. The riskiest combination (small business, mid income, 31.71%) is close to 3x the safest one (car loans, high income, 11.54%).
+
+---
+
+## Part 2: L&T NBFC (India)
+
+This part looks at a real Indian NBFC's vehicle loan book instead which is L&T Financial Services. The dataset's structured differently from Lending Club: it only tells you whether a borrower defaulted on their "FIRST EMI", not the full repayment history, so there's no vintage curve here and no interest rate/grade data either. What it does have is bureau score, loan-to-value ratio, and employment type, so this part is really about underwriting risk: which borrower characteristics predict default at the point the loan is approved, rather than how risk plays out over a loan's life. ~233k loans total.
+
+### Default rate by bureau score band
+[`Sql_queries/Risk_by_bureau_score_band_analysis.sql`](Sql_queries/Risk_by_bureau_score_band_analysis.sql) · [`Charts/risk_by_bureau_score_chart.png`](Charts/risk_by_bureau_score_chart.png)
+
+Poor score (<500): 23.71%. Fair (500-700): 22.04%. Good (700+): 15.79%. Bureau score works as a risk signal here, same as anyone would expect.
+
+### Default rate by employment type
+[`Sql_queries/Risk_by_employment_type_analysis.sql`](Sql_queries/Risk_by_employment_type_analysis.sql) · [`Charts/risk_by_employment_type_chart.png`](Charts/risk_by_employment_type_chart.png)
+
+Self-employed borrowers default more (22.77%) than salaried ones (20.35%) which makes sense, self-employed income tends to be less steady. About 7,661 loans had no employment type recorded at all (21.46% default rate), that is why, I kept that as its own row in the raw results since it's real data, but left it out of the chart since it's not an actual employment category.
+
+### Default rate by LTV band
+[`Sql_queries/Risk_by_LTV_band_analysis.sql`](Sql_queries/Risk_by_LTV_band_analysis.sql) · [`Charts/risk_by_LTV_chart.png`](Charts/risk_by_LTV_chart.png)
+
+Low LTV (<70%): 16.15%. Mid LTV (70-90%): 23.88%. High LTV (90%+): 22.64%. The Low band behaves as expected : less borrower skin in the game usually means more risk. But Mid actually comes out riskier than High here, which doesn't fit that theory. The likely reason: the High LTV band only has 1,219 loans, versus 65k+ and 166k+ in the other two bands, too small a sample to trust against the much larger groups. I'm reporting the number as-is rather than smoothing it over, but I wouldn't treat the Mid-vs-High ordering as a real finding.
+
+---
+
+## What connects the two parts
+
+Neither dataset can be merged or compared number-to-number as they have different countries, different loan products, different definitions of default. But a few of the same underlying ideas show up in both: something that measures how much of a cushion the borrower has (debt-to-income in Lending Club, LTV in L&T) predicts risk in both portfolios, and so does some version of income/employment stability. That's really the point of doing two modules instead of one, checking whether the same kind of risk logic holds up outside of one specific dataset, rather than assuming it does.
+
+## A few honest limitations
+- The Lending Club grade vs default comparison isn't a real profitability number, just a rough directional signal (see note above).
+- Recent Lending Club vintages (after Q3 2017) are left out of the trend analysis since they haven't seasoned yet.
+- L&T's employment type has ~7,661 loans with no value recorded, that is why, included in the raw results, excluded from the chart.
+- L&T's High LTV band has a small sample (1,219 loans) relative to the other two bands : the Mid > High default rate ordering is likely sample noise, not a real effect.
+- The two datasets aren't statistically comparable meanining any similarities noted above are pattern-level observations, not a combined analysis.
