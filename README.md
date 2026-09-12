@@ -30,7 +30,7 @@ This project applies SQL-based credit risk analysis to two real lending datasets
 The question I was working from: is the loan book getting riskier over time, where's the risk concentrated, and is the interest rate actually pricing for it? Everything here runs on ~1.34 million closed loans (Fully Paid or Charged Off).
 
 ### Default rate by issue quarter (vintage analysis)
-[`sql_queries/vintage_analysis.sql`](sql_queries/vintage_analysis.sql) · [`charts/vintage_default_rate_chart.png`](charts/vintage_default_rate_chart.png)
+[`Sql_queries/Vintage_analysis.sql`](Sql_queries/Vintage_analysis.sql) · [`Charts/Vintage_default_rate_chart.png`](Charts/Vintage_default_rate_chart.png)
 
 Default rate went from around 12% in 2008 up to roughly 26% by 2016, then flattened out near 24%. I cut the chart off after Q3 2017 on purpose because anything issued after that hasn't had time to actually default yet, so the raw numbers for those quarters look artificially low. Including them would make it look like risk suddenly dropped at the end, which isn't real.
 
