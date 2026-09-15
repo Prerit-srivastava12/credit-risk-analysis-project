@@ -70,6 +70,8 @@ This part looks at a real Indian NBFC's vehicle loan book instead which is L&T F
 
 Poor score (<500): 23.71%. Fair (500-700): 22.04%. Good (700+): 15.79%. Bureau score works as a risk signal here, same as anyone would expect.
 
+Update : Corrected after finding this issue while building the follow-up ML project: the original version of this query included 116,950 loans with a bureau_score of exactly 0, which isn't a real low score. it's a placeholder for borrowers with no credit history on file. Mixing those in understated the Poor band's true default rate (originally showed 23.71%). Excluding those placeholder rows gives the corrected, more accurate numbers above, genuinely poor-credit borrowers default noticeably more often (25.99%) than the diluted original figure suggested, and the Poor > Fair > Good pattern is now cleaner and more trustworthy.
+
 ### Default rate by employment type
 [`Sql_queries/Risk_by_employment_type_analysis.sql`](Sql_queries/Risk_by_employment_type_analysis.sql) · [`Charts/risk_by_employment_type_chart.png`](Charts/risk_by_employment_type_chart.png)
 
